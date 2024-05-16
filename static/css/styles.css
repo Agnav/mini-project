@@ -1,0 +1,247 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Days+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+:root {
+  --primary-color: #28bf96;
+  --primary-color-dark: #182628;
+  --text-dark: #111827;
+  --text-light: #6b7280;
+  --white: #ffffff;
+  --org:#ff9100;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  outline: white;
+  border: white;
+  font-size: 1rem;
+  color: var(--white);
+  background-color: var(--org);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: var(--primary-color-dark);
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav__logo {
+  font-family: "Days One", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 2rem;
+  color: var(--white);
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.link a {
+  text-decoration: none;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.link a:hover {
+  color: var(--primary-color-dark);
+}
+
+.header {
+  padding: 0 1rem;
+  height: 100vh;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+/*.content h1 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: normal;
+  margin-bottom: 1rem;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.content h1 span {
+  font-weight: 400;
+}*/
+
+.content1 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: normal;
+  color: #fff;
+  margin-bottom: 2rem;
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 1.75rem;
+}
+.image_bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  height: 450px;
+  width: 450px;
+  background-color: var(--white);
+  border-radius: 100%;
+  z-index: -1;
+}
+/*.image {
+  position: relative;
+  text-align: center;
+  isolation: isolate;
+}
+
+.image img {
+  width: 200%;
+  max-width: 600px;
+  
+}
+
+.image__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+  background-color: var(--white);
+  border-radius: 5px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  animation: float 4s ease-in-out infinite;
+
+}*/
+
+/*new lines*/
+.float-area{
+  height:50vh;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-img{
+  transform: translateY(-10%);
+  animation: floater 4s ;
+  transition: ease 0.5s;
+  width: 100%;
+  height: 150%;
+}
+
+
+
+@keyframes floater {
+  0%{transform: translateY(-10%);transition: ease 0.5s;}
+  50%{transform: translateY(10%);transition: ease 0.5s;}
+}
+
+/*dfdf*/
+
+
+
+html{
+  min-height: 100%;
+  overflow: hidden;
+}
+body{
+  height: calc(100vh - 8em);
+  padding: 4em;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: var(--primary-color);  
+}
+.line-1{
+
+
+
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: normal;
+  margin-bottom: 1rem;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  position: relative;
+  top: 50%;  
+  width: 24em;
+  margin: 0 auto;
+  border-right: 2px solid rgba(255,255,255,.75);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  transform: translateY(-50%);    
+}
+
+/* Animation */
+.anim-typewriter{
+  animation: typewriter 2s 1s 1 normal both,
+             blinkTextCursor 500ms infinite normal;
+}
+@keyframes typewriter{
+  from{width: 0;}
+  to{width: 8.9em;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color: rgba(255,255,255,.75);}
+  to{border-right-color: transparent;}
+}
+
+
+
+
+@media (width < 900px) {
+  .nav__links {
+    display: none;
+  }
+
+  .header {
+    padding: 1rem;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .content {
+    text-align: center;
+  }
+
+  .image {
+    grid-area: 1/1/2/2;
+  }
+}

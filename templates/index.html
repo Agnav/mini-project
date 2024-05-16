@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <title>Park-in</title>
+  </head>
+  <body>
+    {% if username %}
+    <div class="container">
+      <nav>
+        <div class="nav__logo">Park-in</div>
+        <ul class="nav__links"></ul>
+        <a href="/logout"><button class="btn">Logout</button></a>
+      </nav>
+      <header class="header">
+        <div class="content">
+          <p class="line-1 anim-typewriter">Welcome<br />{{ username }}</p>
+          <!--<h1><span>Get Quick</span><br />PARKING Services</h1>--->
+          <div class="content1">
+            <p>
+              "Welcome to our Parking Assistance website! We're here to make
+              your parking experience easier and stress-free. Whether you're
+              searching for available parking spots, looking for valet services,
+              or need assistance with parking regulations, we've got you
+              covered. Say goodbye to circling the block endlessly Let us guide
+              you to convenient parking solutions with just a few clicks. Let's
+              park smarter together!"
+            </p>
+          </div>
+          <a href="/parkmap"><button class="btn">Book your slots</button></a>
+        </div>
+
+        <!-- <div class="image">
+          <span class="image__bg"></span>
+          <img src="assets/header-bg.png" alt="header image" />
+        </div>
+      -->
+        <div class="float-area">
+          <img
+            src="/static/image_bg.png"
+            class="floating-img"
+            alt="my floating image"
+          />
+        </div>
+      </header>
+    </div>
+    {% else %}
+    <div class="container">
+      <nav>
+        <div class="nav__logo">Park-in</div>
+        <ul class="nav__links"></ul>
+        <a href="/login"><button class="btn">Login</button></a>
+      </nav>
+      <header class="header">
+        <div class="content">
+          <p class="line-1 anim-typewriter">Get Quick<br />PARKING Services</p>
+          <!--<h1><span>Get Quick</span><br />PARKING Services</h1>--->
+          <div class="content1">
+            <p>
+              "Welcome to our Parking Assistance website! We're here to make
+              your parking experience easier and stress-free. Whether you're
+              searching for available parking spots, looking for valet services,
+              or need assistance with parking regulations, we've got you
+              covered. Say goodbye to circling the block endlessly Let us guide
+              you to convenient parking solutions with just a few clicks. Let's
+              park smarter together!"
+            </p>
+          </div>
+          <a href="/register"><button class="btn">Register Now</button></a>
+        </div>
+
+        <!-- <div class="image">
+          <span class="image__bg"></span>
+          <img src="assets/header-bg.png" alt="header image" />
+        </div>
+      -->
+        <div class="float-area">
+          <img
+            src="/static/image_bg.png"
+            class="floating-img"
+            alt="my floating image"
+          />
+        </div>
+      </header>
+    </div>
+    {% endif %}
+  </body>
+</html>

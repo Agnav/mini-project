@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bookhistory.css') }}"
+    />
+    <title>Ticket</title>
+  </head>
+  <body>
+    <header class="header">
+        <div class="logoname">
+          <h3>Park-in</h3>
+        </div>
+        <nav class="links">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <!--<li><a href="parkmap.html">Parkmap</a></li>
+                  <li><a href="#">Contact</a></li> -->
+          <li><a href="/logout"><button class="status-cancelled">Logout</button></a></li>
+          </ul>
+        </nav>
+      </header>
+	  <div class="ticket">
+		<form method="POST" action="/login">
+			<input class="inpt" input="text" name="book" placeholder="Booking ID" required>
+			<button type="submit" class="btn">Check Ticket</button>
+		</form>
+
+			<div class="list">
+				<h1>TICKET</h1>
+				<ul>
+					<li><h3  style="color: red">{{ book[0] }}</h3></li>
+					<li><h3  style="color: red">{{ book[1] }}</h3></li>
+					<li><h3  style="color: red">{{ book[2] }}</h3></li>
+					<li>{% if error %}
+						<h3 style="color: red">{{ error }}</h3>
+						{% endif %}
+						{% if msg %}
+						<h3 style="color: green">{{ msg }}</h3>
+						{% endif %}
+						<h3  style="color: red">{{ book[3] }}</h3></li></li>
+				</ul>
+			</div>
+
+
+	  </div>
+    <div class="history-table">
+      <h2>Slot Booked History</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Slot Booked</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>BookingID</th>
+            <th>Mail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data will be dynamically inserted here -->
+		  {% for user in data %}
+		  <tr>
+            <td>{{ user[0] }}</td>
+            <td>{{ user[1] }}</td>
+            <td>{{ user[2] }}</td>
+            <td>{{ user[3] }}</td>
+            <td>{{ user[4] }}</td>
+            <td>{{ user[5] }}</td>
+        </tr>
+		{% endfor %}
+          <!-- Add more rows as needed -->
+        </tbody>
+      </table>
+    </div>
+    </table>
+  </body>
+</html>
