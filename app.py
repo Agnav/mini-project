@@ -1,5 +1,6 @@
 from flask import Flask,render_template,request,session,redirect,url_for
 from flask_mysqldb import MySQL
+from datetime import datetime as dt
 
 
 #cursor = connection.cursor()
@@ -111,6 +112,9 @@ def parkmap():
 
 @app.route('/payment', methods=['GET','POST'])
 def payment():
+
+#slot booking
+
     if request.method == 'POST':
          username = session['username']
          slot = request.form['slot']
@@ -119,6 +123,10 @@ def payment():
          cur = mysql.connection.cursor()
          cur.execute(f"SELECT COUNT(*) FROM user WHERE slot = '{slot}'")
          count = cur.fetchone()[0]
+
+
+         # check whether the selected slot is alreasy in the database (count == 0 means not preset)
+         
          if count == 0:
             cur.execute(f"update user set slot = '{slot}', start = '{start}', end = '{end}', id = '{username}{slot}' WHERE username = '{username}'")
             mysql.connection.commit()
@@ -130,8 +138,38 @@ def payment():
             cur.close()
             session['id'] = user[4]
             return render_template("ticket.html",username=session['username'],slot = user[1],start = user[2],end = user[3],id=user[4])
+         
+        #if present compare the existing dates 
          else:
-            return render_template("parkmap.html",error="Slot already Booked")
+            cur.execute(f"select start from user where slot = '{slot}'")
+            oldstrt = cur.fetchone()[0]
+            cur.execute(f"select end from user where slot = '{slot}'")
+            oldnd = cur.fetchone()[0]
+
+            oldstrt = str(oldstrt)
+            oldnd = str(oldnd)
+
+            newstart = dt.strptime(start, '%H:%M')
+            newend =  dt.strptime(end, '%H:%M')
+            oldstart =  dt.strptime(oldstrt, '%H:%M:%S')
+            oldend =  dt.strptime(oldnd, '%H:%M:%S')
+            if newend <= oldstart or newstart >= oldend:
+                cur.execute(f"update user set slot = '{slot}', start = '{start}', end = '{end}', id = '{username}{slot}' WHERE username = '{username}'")
+                mysql.connection.commit()
+                cur.close()
+                username = session['username']
+                cur = mysql.connection.cursor()
+                cur.execute(f"select username,slot,start,end,id from user where username = '{username}'")
+                user = cur.fetchone()
+                cur.close()
+                session['id'] = user[4]
+                return render_template("ticket.html",username=session['username'],slot = user[1],start = user[2],end = user[3],id=user[4])
+            else:
+                return render_template("parkmap.html",error="Slot already Booked")
+    
+         
+    #fetching data for slot booked details
+
     username=session['username']
     cur = mysql.connection.cursor()
     cur.execute(f"SELECT COUNT(id) FROM user where username = '{username}'")
