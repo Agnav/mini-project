@@ -53,7 +53,7 @@ def login():
                 result = count[0]
                 return render_template("admindashboard.html", data=data, count=result, book=book)
             else:
-                return render_template('login.html', error='Invalid username or password')
+                return render_template('index.html', login_error='Invalid username or password',scroll_to_signup =True)
 
         if 'book' in request.form:
             id = request.form['book']
@@ -74,7 +74,7 @@ def login():
                 msg = 'Valid'
                 return render_template("admindashboard.html", book=check, data=data ,msg = msg)
 
-    return render_template("login.html", book=book)
+    return render_template("index.html", book=book)
 
 
 
@@ -86,19 +86,19 @@ def register():
          username = request.form['username']
          mail = request.form['mail']
          password = request.form['password']
-         dob = request.form['dob']
+        #  dob = request.form['dob']
          cur = mysql.connection.cursor()
          cur.execute(f"SELECT COUNT(*) FROM user WHERE username = '{username}'")
          count = cur.fetchone()[0]
          if count == 0:
-            cur.execute(f"insert into user (username, mail, password, date) values ('{username}', '{mail}', '{password}', '{dob}')")
+            cur.execute(f"insert into user (username, mail, password) values ('{username}', '{mail}', '{password}')")
             mysql.connection.commit()
             cur.close()
             return redirect(url_for('login'))
          else:
-             return render_template("signup.html",error="Username already taken")
+             return render_template("index.html",signin_error="Username already taken",scroll_to_signup =True)
               
-    return render_template("signup.html")
+    return render_template("index.html")
 
 
 
