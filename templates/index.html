@@ -9,89 +9,289 @@
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/styles.css') }}"
+      href="{{ url_for('static', filename='css/index.css') }}"
     />
     <title>Park-in</title>
   </head>
   <body>
     {% if username %}
-    <div class="container">
-      <nav>
-        <div class="nav__logo">Park-in</div>
-        <ul class="nav__links"></ul>
-        <a href="/logout"><button class="btn">Logout</button></a>
-      </nav>
-      <header class="header">
-        <div class="content">
-          <p class="line-1 anim-typewriter">Welcome<br />{{ username }}</p>
-          <!--<h1><span>Get Quick</span><br />PARKING Services</h1>--->
-          <div class="content1">
-            <p>
-              "Welcome to our Parking Assistance website! We're here to make
-              your parking experience easier and stress-free. Whether you're
-              searching for available parking spots, looking for valet services,
-              or need assistance with parking regulations, we've got you
-              covered. Say goodbye to circling the block endlessly Let us guide
-              you to convenient parking solutions with just a few clicks. Let's
-              park smarter together!"
-            </p>
+
+    <nav>
+      <div class="nav__logo">Park-in</div>
+      <div class="nav__items">
+        <div class="nav__item"><a href="#">home</a></div>
+        <div class="nav__item"><a href="#services">services</a></div>
+        <div class="nav__item"><a href="#">contact</a></div>
+        <div class="nav__item">
+          <a href="/logout"><button class="btn">LOGOUT</button></a>
+        </div>
+      </div>
+    </nav>
+    <div class="container_logged">
+      <div class="image_booking">
+        <img src="/static/booking_2.svg" />
+      </div>
+
+      <div class="image_booking_2">
+        <img src="/static/booking.svg" />
+      </div>
+
+      <div class="hero_logged">
+        <div class="content_top">
+          <div class="image_top">
+            <img src="/static/profile.svg" />
           </div>
-          <a href="/parkmap"><button class="btn">Book your slots</button></a>
         </div>
 
-        <!-- <div class="image">
-          <span class="image__bg"></span>
-          <img src="assets/header-bg.png" alt="header image" />
+        <div class="content_bottom">
+          <div class="content_bottom_heading">
+            <h2>Welcome<br /></h2>
+            <h1>{{ username }}</h1>
+          </div>
+          <div class="content_bottom_1">
+            <p>Start booking your slots now !</p>
+          </div>
+          <div class="content_bottom_2">
+            <a href="/parkmap"><button class="btn">BOOK YOUR SLOTS</button></a>
+          </div>
         </div>
-      -->
-        <div class="float-area">
-          <img
-            src="/static/image_bg.png"
-            class="floating-img"
-            alt="my floating image"
-          />
-        </div>
-      </header>
+      </div>
     </div>
+
+    <section id="services">
+      <div class="container-card">
+        <div class="top">About us</div>
+        <div class="about">
+          <div class="card-1">
+            <div class="card-header">
+              <h2>Real-Time <br />Parking Availability</h2>
+            </div>
+            <div class="card-content">
+              <p>
+                ParkIn provides users with real-time information on parking
+                availability . Through the website, users can view the current
+                availability of parking spots in different areas
+              </p>
+            </div>
+          </div>
+          <div class="card-2">
+            <div class="card-header">
+              <h2>Reservation <br />Pre-Booking System</h2>
+            </div>
+            <div class="card-content">
+              <p>
+                ParkIn offers a convenient reservation and pre-booking system to
+                secure parking spots in advance. Users can browse available
+                parking options,date, and time
+              </p>
+            </div>
+          </div>
+          <div class="card-3">
+            <div class="card-header">
+              <h2>Interactive Parking <br />Maps</h2>
+            </div>
+            <div class="card-content">
+              <p>
+                ParkIn provides interactive parking maps that allow users to
+                visualize parking options. Users can explore parking facilities
+                using an interactive map interface
+              </p>
+            </div>
+          </div>
+          <div class="card-3">
+            <div class="card-header">
+              <h2>Accessible Parking Information</h2>
+            </div>
+            <div class="card-content">
+              <p>
+                ParkIn provides detailed information about the accessibility
+                features of parking facilities, catering to users with special
+                needsBy offering this information upfront
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     {% else %}
+
+    <!-- if not logged in -->
+
+    <nav>
+      <div class="nav__logo">Park-in</div>
+      <div class="nav__items">
+        <div class="nav__item"><a href="#">home</a></div>
+        <div class="nav__item"><a href="#services">services</a></div>
+        <div class="nav__item"><a href="#">contact</a></div>
+        <div class="nav__item">
+          <a href="#signup"><button class="btn">LOGIN</button></a>
+        </div>
+      </div>
+    </nav>
     <div class="container">
-      <nav>
-        <div class="nav__logo">Park-in</div>
-        <ul class="nav__links"></ul>
-        <a href="/login"><button class="btn">Login</button></a>
-      </nav>
-      <header class="header">
-        <div class="content">
-          <p class="line-1 anim-typewriter">Get Quick<br />PARKING Services</p>
-          <!--<h1><span>Get Quick</span><br />PARKING Services</h1>--->
-          <div class="content1">
+      <div class="hero">
+        <div class="content_left">
+          <div class="content_left_heading">
+            <h2>Welcome To<br /></h2>
+            <h1>Stress Free Parking</h1>
+          </div>
+          <div class="content_left_1">
             <p>
-              "Welcome to our Parking Assistance website! We're here to make
-              your parking experience easier and stress-free. Whether you're
-              searching for available parking spots, looking for valet services,
-              or need assistance with parking regulations, we've got you
-              covered. Say goodbye to circling the block endlessly Let us guide
-              you to convenient parking solutions with just a few clicks. Let's
-              park smarter together!"
+              "Welcome to Park-In! <br />Your personalised parking assistant<br />We're
+              here to make your parking experience easier and stress-free.Lets
+              Park-in!"
             </p>
           </div>
-          <a href="/register"><button class="btn">Register Now</button></a>
+          <div class="content_left_2">
+            <a href="#signup"><button class="btn">SIGN UP</button></a>
+          </div>
         </div>
 
-        <!-- <div class="image">
-          <span class="image__bg"></span>
-          <img src="assets/header-bg.png" alt="header image" />
+        <div class="content_right">
+          <div class="image">
+            <img src="/static/hero2.svg" />
+          </div>
         </div>
-      -->
-        <div class="float-area">
-          <img
-            src="/static/image_bg.png"
-            class="floating-img"
-            alt="my floating image"
-          />
-        </div>
-      </header>
+      </div>
     </div>
+
+    <section id="services">
+      <div class="container-card">
+        <div class="top">About us</div>
+        <div class="about">
+          <div class="card-1">
+            <div class="card-header">
+              <h2>Real-Time <br />Parking Availability</h2>
+            </div>
+            <div class="card-content">
+              <p>
+                ParkIn provides users with real-time information on parking
+                availability . Through the website, users can view the current
+                availability of parking spots in different areas
+              </p>
+            </div>
+          </div>
+          <div class="card-2">
+            <div class="card-header">
+              <h2>Reservation <br />Pre-Booking System</h2>
+            </div>
+            <div class="card-content">
+              <p>
+                ParkIn offers a convenient reservation and pre-booking system to
+                secure parking spots in advance. Users can browse available
+                parking options,date, and time
+              </p>
+            </div>
+          </div>
+          <div class="card-3">
+            <div class="card-header">
+              <h2>Interactive Parking <br />Maps</h2>
+            </div>
+            <div class="card-content">
+              <p>
+                ParkIn provides interactive parking maps that allow users to
+                visualize parking options. Users can explore parking facilities
+                using an interactive map interface
+              </p>
+            </div>
+          </div>
+          <div class="card-3">
+            <div class="card-header">
+              <h2>Accessible Parking Information</h2>
+            </div>
+            <div class="card-content">
+              <p>
+                ParkIn provides detailed information about the accessibility
+                features of parking facilities, catering to users with special
+                needsBy offering this information upfront
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="signup">
+      <div class="container signup-bg">
+        <div class="signup">
+          <div class="container-signup" id="container">
+            <div class="form-container sign-up">
+              <form action="/register" method="POST">
+                <h1>Create Account</h1>
+
+                <span>or register if you are a new user</span>
+                {% if signin_error %}
+                <span class="error">username already taken</span>
+                <script>
+                  window.ScrollSignin = true;
+                </script>
+                {% endif %}
+                <input
+                  type="text"
+                  placeholder="Username"
+                  name="username"
+                  required
+                />
+                <input type="email" placeholder="Email" name="mail" required />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  required
+                />
+                <button type="submit" class="btn">Sign Up</button>
+              </form>
+            </div>
+            <div class="form-container sign-in">
+              <form action="/login" method="POST">
+                <h1>Sign In</h1>
+                <span>or use your username password</span>
+                {% if login_error %}
+                <span class="error">invalid username or password</span>
+                <script>
+                  window.ScrollLogin = true;
+                </script>
+                {% endif %}
+                <input
+                  type="text"
+                  placeholder="Username"
+                  name="username"
+                  required
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  required
+                />
+                <!-- <a href="#">Forget Your Password?</a> -->
+                <button type="submit" class="btn">Sign In</button>
+              </form>
+            </div>
+            <div class="toggle-container">
+              <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                  <h1>Welcome Back!</h1>
+                  <p>Enter your personal details to use all of site features</p>
+                  <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                  <h1>Hello, Friend!</h1>
+                  <p>
+                    Register with your personal details to use all of site
+                    features
+                  </p>
+                  <button class="hidden" id="register">Sign Up</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="/static/js/index.js"></script>
+
     {% endif %}
   </body>
 </html>
