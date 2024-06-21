@@ -15,7 +15,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /* scroll-snap-type: y mandatory; */
   scroll-padding-top: 5em;
   scroll-behavior: smooth;
 }
@@ -111,7 +110,17 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* scroll-snap-align: start; */
+}
+.container::before {
+  content: "";
+  background-image: url("/static/admin_pattern.svg");
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 5%;
+  z-index: -1;
 }
 
 .hero {
@@ -123,22 +132,24 @@ nav {
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
-  border-radius: 20px;
-  background-color: var(--accent-light);
+  border-radius: 10px;
 }
 .slots {
   width: 1200px;
-  padding: 40px 0px;
+  padding: 20px 0px;
+  margin: 20px 0px;
   display: flex;
   align-items: center;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
   justify-content: space-evenly;
+  background-color: #6c88e2;
 }
 
 .flex1 {
   width: 36%;
   display: flex;
   justify-content: space-between;
-  /* flex-direction: column; */
 }
 
 .flex2 {
@@ -146,18 +157,17 @@ nav {
   display: flex;
   gap: 100px;
   justify-content: space-between;
-  /* flex-direction: column; */
 }
 
 .square {
   display: flex;
-  width: 120px;
+  width: 100px;
   height: 80px;
-  background-color: rgb(2, 192, 2);
+  background-color: #f28500;
   color: var(--light);
   font-weight: bold;
   border-radius: 10px;
-  /* border: 2px solid var(--light); */
+  border: 1px solid var(--dark);
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -166,7 +176,6 @@ nav {
   font-weight: 600;
   font-size: 2rem;
   color: var(--light);
-  box-shadow: 0px 0px 2px 1px white;
 }
 
 .item {
@@ -182,6 +191,8 @@ nav {
   flex-direction: column;
   gap: 20px;
   color: #fff;
+  border-radius: 10px;
+  background-color: var(--accent);
 }
 
 .input_slots h4 {
@@ -208,6 +219,11 @@ nav {
   width: 100%;
   max-width: 300px;
   outline: none;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-align: center;
 }
 .input_box {
   width: 300px;
@@ -226,7 +242,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 28px 0px 0px 0px;
+  padding: 12px 0px 20px 0px;
 }
 
 /* The alert message box */
@@ -238,6 +254,7 @@ nav {
   width: 350px;
   padding: 20px;
   background-color: #f44336; /* Red */
+  border-radius: 10px;
   color: white;
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
@@ -248,6 +265,7 @@ nav {
   align-items: center;
   top: 45%;
   left: 39%;
+  animation: anim 100ms linear;
 }
 .alert button {
   background-color: var(--light);
@@ -259,4 +277,16 @@ nav {
 }
 .active {
   display: none;
+}
+
+@keyframes anim {
+  0% {
+    scale: 80%;
+    opacity: 0%;
+  }
+
+  100% {
+    scale: 100%;
+    opacity: 100%;
+  }
 }
