@@ -17,15 +17,15 @@
     <div class="nav__logo">Park-in</div>
     <div class="nav__items">
       <div class="nav__item"><a href="/">home</a></div>
-      <div class="nav__item"><a href="#services">services</a></div>
-      <div class="nav__item"><a href="#">contact</a></div>
+      <div class="nav__item"><a href="/">my_ticket</a></div>
+      <!-- <div class="nav__item"><a href="#">contact</a></div> -->
       <div class="nav__item">
         <a href="#signup"><button class="btn">LOGOUT</button></a>
       </div>
     </div>
   </nav>
   <body>
-    {% if error %}
+    {% if parkmap_error %}
 
     <div class="alert" id="alert">
       THIS SLOT IS ALREADY BOOKED
@@ -49,7 +49,6 @@
                   type="text"
                   name="slot"
                   id="selected-slot"
-                  placeholder="Selected Slot"
                   required
                   readonly
                 />
