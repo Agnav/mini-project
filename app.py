@@ -22,7 +22,19 @@ mysql=MySQL(app)
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template("index.html",username=session['username'])
+        username=session['username']
+        cur = mysql.connection.cursor()
+        cur.execute(f"SELECT COUNT(id) FROM user where username = '{username}'")
+        count = cur.fetchone()[0]
+        if count == 0:
+             return render_template("index.html",username=session['username'],ticket_error= True)
+        else:
+             username = session['username']
+             cur = mysql.connection.cursor()
+             cur.execute(f"select username,slot,start,end,id from user where username = '{username}'")
+             user = cur.fetchone()
+             cur.close()
+             return render_template("index.html",username=session['username'],slot = user[1],start = user[2],end = user[3],id=user[4])
     else:
         return render_template("index.html")
 
@@ -45,6 +57,7 @@ def login():
                 session['username']= user[0]
                 return redirect(url_for('index'))
             if username == "admin" and password == "admin@123":
+                session['username'] = username
                 cur = mysql.connection.cursor()
                 cur.execute(f"select username,slot,start,end,id,mail from user")
                 data = cur.fetchall()
@@ -63,16 +76,15 @@ def login():
             cur.execute(f"SELECT COUNT(*) FROM user")
             count = cur.fetchone()
             result = count[0]
-            cur.execute(f"select slot,start,end from user where id = '{id}'")
+            cur.execute(f"select username,slot,start,end from user where id = '{id}'")
             check = cur.fetchone()
             cur.execute(f"SELECT COUNT(*) FROM user WHERE id = '{id}'")
             count1 = cur.fetchone()[0]
             cur.close()
             if count1 == 0:
-                return render_template("admindashboard.html", error="invalid booking id", book=book, data=data)
+                return render_template("admindashboard.html", invalid_error=True, book=book, data=data)
             else:
-                msg = 'Valid'
-                return render_template("admindashboard.html", book=check, data=data ,msg = msg)
+                return render_template("admindashboard.html", book=check, data=data,valid=True )
 
     return render_template("index.html", book=book)
 
@@ -94,9 +106,9 @@ def register():
             cur.execute(f"insert into user (username, mail, password) values ('{username}', '{mail}', '{password}')")
             mysql.connection.commit()
             cur.close()
-            return redirect(url_for('login'))
+            return render_template("index.html",scroll_to_login =True)
          else:
-             return render_template("index.html",signin_error="Username already taken",scroll_to_signup =True)
+             return render_template("index.html",signin_error="Username already taken")
               
     return render_template("index.html")
 
@@ -137,7 +149,7 @@ def payment():
             user = cur.fetchone()
             cur.close()
             session['id'] = user[4]
-            return render_template("ticket.html",username=session['username'],slot = user[1],start = user[2],end = user[3],id=user[4])
+            return redirect(url_for('index'))
          
         #if present compare the existing dates 
          else:
@@ -163,26 +175,15 @@ def payment():
                 user = cur.fetchone()
                 cur.close()
                 session['id'] = user[4]
-                return render_template("ticket.html",username=session['username'],slot = user[1],start = user[2],end = user[3],id=user[4])
+                return redirect(url_for('index'))
             else:
-                return render_template("parkmap.html",error="Slot already Booked")
-    
+                return render_template("parkmap.html",parkmap_error = True)
+    else:
+        return redirect(url_for('index'))
          
     #fetching data for slot booked details
 
-    username=session['username']
-    cur = mysql.connection.cursor()
-    cur.execute(f"SELECT COUNT(id) FROM user where username = '{username}'")
-    count = cur.fetchone()[0]
-    if count == 0:
-             return render_template("ticket.html",error="No bookings")
-    else:
-             username = session['username']
-             cur = mysql.connection.cursor()
-             cur.execute(f"select username,slot,start,end,id from user where username = '{username}'")
-             user = cur.fetchone()
-             cur.close()
-             return render_template("ticket.html",username=session['username'],slot = user[1],start = user[2],end = user[3],id=user[4])
+    
     
         
 @app.route("/drop" ,methods=['GET','POST'])
@@ -193,8 +194,8 @@ def drop():
         cur.execute(f"UPDATE user SET slot = NULL, start = NULL, end = NULL, id = NULL WHERE username = '{username}'")
         mysql.connection.commit()
         cur.close()
-        return render_template("ticket.html",error="No booking")
-    return render_template("ticket.html")
+        return render_template("index.html",username=session['username'],ticket_error= True)
+    return render_template("index.html",username=session['username'])
 
 
 
