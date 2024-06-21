@@ -20,8 +20,8 @@
       <div class="nav__logo">Park-in</div>
       <div class="nav__items">
         <div class="nav__item"><a href="#">home</a></div>
-        <div class="nav__item"><a href="#services">services</a></div>
-        <div class="nav__item"><a href="#">contact</a></div>
+        <div class="nav__item"><a href="#ticket">my_ticket</a></div>
+        <!-- <div class="nav__item"><a href="#">contact</a></div> -->
         <div class="nav__item">
           <a href="/logout"><button class="btn">LOGOUT</button></a>
         </div>
@@ -58,59 +58,45 @@
       </div>
     </div>
 
-    <section id="services">
-      <div class="container-card">
-        <div class="top">About us</div>
-        <div class="about">
-          <div class="card-1">
-            <div class="card-header">
-              <h2>Real-Time <br />Parking Availability</h2>
-            </div>
-            <div class="card-content">
-              <p>
-                ParkIn provides users with real-time information on parking
-                availability . Through the website, users can view the current
-                availability of parking spots in different areas
-              </p>
-            </div>
-          </div>
-          <div class="card-2">
-            <div class="card-header">
-              <h2>Reservation <br />Pre-Booking System</h2>
-            </div>
-            <div class="card-content">
-              <p>
-                ParkIn offers a convenient reservation and pre-booking system to
-                secure parking spots in advance. Users can browse available
-                parking options,date, and time
-              </p>
-            </div>
-          </div>
-          <div class="card-3">
-            <div class="card-header">
-              <h2>Interactive Parking <br />Maps</h2>
-            </div>
-            <div class="card-content">
-              <p>
-                ParkIn provides interactive parking maps that allow users to
-                visualize parking options. Users can explore parking facilities
-                using an interactive map interface
-              </p>
-            </div>
-          </div>
-          <div class="card-3">
-            <div class="card-header">
-              <h2>Accessible Parking Information</h2>
-            </div>
-            <div class="card-content">
-              <p>
-                ParkIn provides detailed information about the accessibility
-                features of parking facilities, catering to users with special
-                needsBy offering this information upfront
-              </p>
+    <section id="ticket">
+      <div class="container_ticket">
+        <div class="hero_ticket">
+          <div class="ticket">
+            <div class="ticket_header"><h2>Your Ticket</h2></div>
+            <div class="ticket_body">
+              <div class="ticket_body_left">
+                <div class="details"><p>Username :</p></div>
+                <div class="details"><p>Slot :</p></div>
+                <div class="details"><p>Start Time :</p></div>
+                <div class="details"><p>End Time :</p></div>
+                <div class="details"><p>ID :</p></div>
+              </div>
+              <div class="ticket_body_right">
+                {% if ticket_error %}
+
+                <div class="details">{{ username}}</div>
+                <div class="details_error">&nbsp;</div>
+                <div class="details_error">&nbsp;</div>
+                <div class="details_error">&nbsp;</div>
+                <div class="details_error">
+                  <a href="/parkmap"></a>no selected slot
+                </div>
+
+                {% else %}
+
+                <div class="details">{{ username}}</div>
+                <div class="details">{{ slot }}</div>
+                <div class="details">{{ start }}</div>
+                <div class="details">{{ end }}</div>
+                <div class="details">{{ id }}</div>
+
+                {% endif %}
+              </div>
             </div>
           </div>
         </div>
+        <form method="POST" action="/drop">
+        <button type="submit" class="btn">CANCEL YOUR SLOTS</button></a></form>
       </div>
     </section>
 
@@ -123,7 +109,7 @@
       <div class="nav__items">
         <div class="nav__item"><a href="#">home</a></div>
         <div class="nav__item"><a href="#services">services</a></div>
-        <div class="nav__item"><a href="#">contact</a></div>
+        <!-- <div class="nav__item"><a href="#">contact</a></div> -->
         <div class="nav__item">
           <a href="#signup"><button class="btn">LOGIN</button></a>
         </div>
@@ -246,13 +232,22 @@
             <div class="form-container sign-in">
               <form action="/login" method="POST">
                 <h1>Sign In</h1>
-                <span>or use your username password</span>
-                {% if login_error %}
+                <span>login using username password</span>
+
+               {% if login_error %}
                 <span class="error">invalid username or password</span>
                 <script>
                   window.ScrollLogin = true;
                 </script>
                 {% endif %}
+
+                {% if scroll_to_login %}
+                <script>
+                  window.ScrollLogin = true;
+                </script>
+                {% endif %}
+
+
                 <input
                   type="text"
                   placeholder="Username"
